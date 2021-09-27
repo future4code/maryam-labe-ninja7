@@ -1,11 +1,12 @@
-import React, { Component } from 'react'
+import React, { Component } from "react";
+import HireService from "./HireService/HireService";
 
 export class AppContainer extends Component {
   render() {
     return (
       <div>
-        <p>Pronto para começar!</p>
+        <HireService />
       </div>
-    )
+    );
   }
 }
