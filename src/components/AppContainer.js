@@ -1,6 +1,8 @@
 import React, { Component } from "react";
-import HireService from "./HireService/HireService";
 import styled  from 'styled-components';
+
+import HireService from "./HireService/HireService";
+import Home from "./Home/Home";
 
 
 
@@ -17,7 +19,41 @@ const Corpo = styled.div`
 `
 
 export class AppContainer extends Component {
+
+  state ={
+    paginaAtual: "home",
+  }
+
+  mudaPagina = (pagina) => {
+    this.setState({   paginaAtual: pagina   })
+  }
+
   render() {
+
+
+
+
+    const renderizaPagina = () => {
+      if(this.state.paginaAtual === "home") {
+        return(   <Home mudaPagina = {this.mudaPagina}  /> )
+      }
+
+      else if(this.state.paginaAtual === "servicos") {
+        return(   <HireService />                       )
+      }
+
+      else if(this.state.paginaAtual === "carrinho") {
+        return(   <Home mudaPagina = {this.mudaPagina}  /> )
+      }
+
+      else if(this.state.paginaAtual === "ninja") {
+        return(   <Home mudaPagina = {this.mudaPagina}  /> )
+      }
+
+    }
+
+
+
     return (
       <div>
         <Header>
@@ -25,25 +61,16 @@ export class AppContainer extends Component {
           Ninjas 
 
           <div>
-            <button>Home</button>
-            <button>Carrinho</button>
+            <button onClick={() => this.mudaPagina( "home"      )}  > Home      </button>
+            <button onClick={() => this.mudaPagina( "carrinho"  )}  > Carrinho  </button>
           </div>
 
         </Header>
 
         <Corpo>
-          <h1>Labeninjas</h1>
-          <h2>Nosso slogan!</h2>
-
-          {console.log(this.props.servico)}
-
-          <div>
-            <button>Quero ser ninja</button>
-            <button>Contratar um ninja</button>  
-          </div> 
-
-        </Corpo>     
-        <HireService />
+          {renderizaPagina()}
+        </Corpo>
+  
       </div>
     );
   }
