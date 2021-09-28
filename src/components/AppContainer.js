@@ -17,7 +17,43 @@ const Corpo = styled.div`
 `
 
 export class AppContainer extends Component {
+
+  state ={
+    paginaAtual: "home",
+  }
+
   render() {
+
+    const renderizaPagina = () => {
+      if(this.state.paginaAtual === "home") {
+        return( 
+          <Corpo>
+            <h1>Labeninjas</h1>
+            <h2>Nosso slogan!</h2>
+
+            <div>
+              <button>Quero ser ninja</button>
+              <button  onClick={() => mudaPagina( "servicos"  )}>Contratar um ninja</button>  
+            </div> 
+          </Corpo>  
+        )
+      }
+      else if(this.state.paginaAtual === "servicos") {
+        return (
+          <Corpo>
+            <HireService />
+          </Corpo>
+        )
+      }
+
+    }
+
+    const mudaPagina = (pagina) => {
+
+      this.setState({paginaAtual: pagina})
+
+    }
+
     return (
       <div>
         <Header>
@@ -25,25 +61,14 @@ export class AppContainer extends Component {
           Ninjas 
 
           <div>
-            <button>Home</button>
-            <button>Carrinho</button>
+            <button onClick={() => mudaPagina( "home"      )}  > Home      </button>
+            <button onClick={() => mudaPagina( "carrinho"  )}  > Carrinho  </button>
           </div>
 
         </Header>
 
-        <Corpo>
-          <h1>Labeninjas</h1>
-          <h2>Nosso slogan!</h2>
-
-          {console.log(this.props.servico)}
-
-          <div>
-            <button>Quero ser ninja</button>
-            <button>Contratar um ninja</button>  
-          </div> 
-
-        </Corpo>     
-        <HireService />
+        {renderizaPagina()}
+  
       </div>
     );
   }
