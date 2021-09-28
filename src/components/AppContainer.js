@@ -1,5 +1,7 @@
 import React, { Component } from 'react'
 import styled  from 'styled-components'
+import HireService from "./HireService/HireService";
+
 
 const Header = styled.div`
   background-color: grey;
@@ -13,7 +15,6 @@ const Corpo = styled.div`
   align-items:      center;
 
 `
-
 
 export class AppContainer extends Component {
   render() {
@@ -42,7 +43,8 @@ export class AppContainer extends Component {
           </div> 
 
         </Corpo>     
+        <HireService />
       </div>
-    )
+    );
   }
 }
