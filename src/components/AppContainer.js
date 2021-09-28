@@ -3,7 +3,7 @@ import styled  from 'styled-components';
 
 import HireService from "./HireService/HireService";
 import Home from "./Home/Home";
-
+import CadastroServiço from "./CadastroServiço"
 
 
 const Header = styled.div`
@@ -47,7 +47,7 @@ export class AppContainer extends Component {
       }
 
       else if(this.state.paginaAtual === "ninja") {
-        return(   <Home mudaPagina = {this.mudaPagina}  /> )
+        return(   <CadastroServiço /> )
       }
 
     }
