@@ -47,7 +47,7 @@ export class AppContainer extends Component {
       }
 
       else if(this.state.paginaAtual === "ninja") {
-        return(   <CadastroServiço /> )
+        return(   <CadastroServiço mudaPagina = {this.mudaPagina} /> )
       }
 
     }
