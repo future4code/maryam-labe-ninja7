@@ -1,6 +1,8 @@
 import React, { Component } from "react";
-import HireService from "./HireService/HireService";
 import styled  from 'styled-components';
+
+import HireService from "./HireService/HireService";
+import Home from "./Home/Home";
 
 
 
@@ -22,37 +24,35 @@ export class AppContainer extends Component {
     paginaAtual: "home",
   }
 
+  mudaPagina = (pagina) => {
+    this.setState({   paginaAtual: pagina   })
+  }
+
   render() {
+
+
+
 
     const renderizaPagina = () => {
       if(this.state.paginaAtual === "home") {
-        return( 
-          <Corpo>
-            <h1>Labeninjas</h1>
-            <h2>Nosso slogan!</h2>
-
-            <div>
-              <button>Quero ser ninja</button>
-              <button  onClick={() => mudaPagina( "servicos"  )}>Contratar um ninja</button>  
-            </div> 
-          </Corpo>  
-        )
+        return(   <Home mudaPagina = {this.mudaPagina}  /> )
       }
+
       else if(this.state.paginaAtual === "servicos") {
-        return (
-          <Corpo>
-            <HireService />
-          </Corpo>
-        )
+        return(   <HireService />                       )
+      }
+
+      else if(this.state.paginaAtual === "carrinho") {
+        return(   <Home mudaPagina = {this.mudaPagina}  /> )
+      }
+
+      else if(this.state.paginaAtual === "ninja") {
+        return(   <Home mudaPagina = {this.mudaPagina}  /> )
       }
 
     }
 
-    const mudaPagina = (pagina) => {
 
-      this.setState({paginaAtual: pagina})
-
-    }
 
     return (
       <div>
@@ -61,13 +61,15 @@ export class AppContainer extends Component {
           Ninjas 
 
           <div>
-            <button onClick={() => mudaPagina( "home"      )}  > Home      </button>
-            <button onClick={() => mudaPagina( "carrinho"  )}  > Carrinho  </button>
+            <button onClick={() => this.mudaPagina( "home"      )}  > Home      </button>
+            <button onClick={() => this.mudaPagina( "carrinho"  )}  > Carrinho  </button>
           </div>
 
         </Header>
 
-        {renderizaPagina()}
+        <Corpo>
+          {renderizaPagina()}
+        </Corpo>
   
       </div>
     );
