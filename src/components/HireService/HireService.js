@@ -1,14 +1,34 @@
 import axios from "axios";
 import React from "react";
 import { axiosConfig, baseUrl } from "../../constants";
-import styled from "styled-components";
+import Filter from "../Filter";
+import Services from "../Services";
 
 class HireService extends React.Component {
   state = {
     services: [],
+    valorMin: "",
+    valorMax: "",
+    pesquisaNome: "",
+    ordem: "",
+    carrinho: [],
   };
+
   componentDidMount = () => {
     this.fetchServices();
+  };
+
+  controlarInputMax = (event) => {
+    this.setState({ valorMax: event.target.value });
+  };
+  controlarInputMin = (event) => {
+    this.setState({ valorMin: event.target.value });
+  };
+  controlarInputNome = (event) => {
+    this.setState({ pesquisaNome: event.target.value });
+  };
+  controlarInputOrdem = (event) => {
+    this.setState({ ordem: event.target.value });
   };
 
   // Get All Jobs
@@ -23,79 +43,66 @@ class HireService extends React.Component {
         console.log(err.response);
       });
   };
-  render() {
-    const services = this.state.services.map((service) => {
-      return (
-        <div>
-          <ProductCardContainer key={service.id}>
-            <h3>{service.title}</h3>
-            <p>Preço: {service.price}</p>
-            <p>Prazo: {(service.dueDate)}</p>
-            <div>
-            <button>Ver detalher</button>
-            <button>Adicionar no Carrinho</button>
-            </div>
-          </ProductCardContainer>
-        </div>
-      );
-    });
-    return (
-      <Container>
-        <FilterContainer>
-          <input placeholder="Valor Mínimo"></input>
-          <input placeholder="Valor Máximo"></input>
-          <input placeholder="Busca por título ou descrição"></input>
-          <select>
-            <option></option>
-            <option>Menor Valor</option>
-            <option>Maior Valor</option>
-            <option>Título</option>
-            <option>Prazo</option>
-          </select>
-        </FilterContainer>
 
-        <ProductsContainer>{services}</ProductsContainer>
-      </Container>
+  filterServices = (serviceList) => {
+    const filterServices = serviceList
+      .filter((service) => {
+        return (
+          this.state.valorMin === "" || service.price >= this.state.valorMin
+        );
+      })
+      .filter((service) => {
+        return (
+          this.state.valorMax === "" || service.price <= this.state.valorMax
+        );
+      })
+      .filter((service) => {
+        return (
+          service.title
+            .toLowerCase()
+            .includes(this.state.pesquisaNome.toLowerCase()) ||
+          service.description
+            .toLowerCase()
+            .includes(this.state.pesquisaNome.toLowerCase())
+        );
+      })
+      .sort((a, b) => {
+        switch (this.state.ordem) {
+          case "title":
+            return a.title.localeCompare(b.title);
+          case "valorMin":
+            return a.price - b.price;
+          case "valorMax":
+            return b.price - a.price;
+          case "nenhum":
+            break;
+          case "dueDate":
+            return b.dueDate - a.dueDate;
+          default:
+            break;
+        }
+      });
+
+    return filterServices;
+  };
+
+  render() {
+    return (
+      <div>
+        <Filter
+          atualizarMax={this.controlarInputMax}
+          atualizarMin={this.controlarInputMin}
+          atualizarpesquisaNome={this.controlarInputNome}
+          valorMax={this.state.valorMax}
+          valorMin={this.state.valorMin}
+          pesquisaNome={this.state.pesquisaNome}
+          ordem={this.state.ordem}
+          atualizarOrdem={this.controlarInputOrdem}
+        />
+        <Services services={this.filterServices(this.state.services)} />
+      </div>
     );
   }
 }
 
 export default HireService;
-
-const ProductsContainer = styled.div`
-  display: flex;
-  flex: 1;
-  flex-wrap: wrap;
-  justify-content: space-around;
-`;
-
-const ProductCardContainer = styled.div`
-  width: 300px;
-  height: 250px;
-  background-color: aliceblue;
-  border: 1px solid black;
-  text-align: center;
-  margin: 16px 12px;
-  display: flex;
-  flex-direction: column;
-  border-radius: 4px;
-`;
-//So pra centralizar os cards
-const Container = styled.div`
-  margin: 50px;
-`;
-
-const FilterContainer = styled.div`
-display: flex;
-justify-content: space-around;
-background-color: aliceblue;
-padding: 40px;
-
-input {
-  width: 200px;
-}
-
-select {
-  width: 200px;
-}
-`
