@@ -21,7 +21,13 @@ class Services extends React.Component {
               >
                 Ver detalhes
               </button>
-              <button>Adicionar no Carrinho</button>
+              <button
+                onClick={() => {
+                  this.props.addToCart(service.id);
+                }}
+              >
+                Adicionar no Carrinho
+              </button>
             </div>
           </ProductCardContainer>
         </div>
