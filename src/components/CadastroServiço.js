@@ -2,6 +2,9 @@ import React from "react";
 import axios from "axios";
 import styled from "styled-components"
 import { key } from "../constants";
+import {Button} from "antd";
+import "antd/dist/antd.css";
+
 
 const TelaCadastro = styled.div`
     justify-items: center;
@@ -73,7 +76,7 @@ export default class CadastroServiço extends React.Component{
     render(){
         return (
             <TelaCadastro>
-                <button onClick={() => this.props.mudaPagina("home")   }> Home </button>
+                <Button type="primary" onClick={() => this.props.mudaPagina("home")   }> Home </Button>
                 <h2>CADASTRE SEU SERVIÇO</h2>
 
                 <input placeholder={"Título"}
@@ -110,7 +113,7 @@ export default class CadastroServiço extends React.Component{
                     onChange={this.handlePrazo}/>
                 </p>
 
-                <button onClick={this.createUser}>Cadastrar Serviço</button>
+                <Button type="primary" onClick={this.createUser}>Cadastrar Serviço</Button>
             </TelaCadastro>
         )
     }

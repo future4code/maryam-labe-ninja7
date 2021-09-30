@@ -4,6 +4,10 @@ import { axiosConfig, baseUrl } from "../../constants";
 import Filter from "../Filter";
 import ServiceDetail from "../ServiceDetail/ServiceDetail";
 import Services from "../ServicesCard";
+import {Button} from "antd";
+import "antd/dist/antd.css";
+
+
 
 class HireService extends React.Component {
   state = {

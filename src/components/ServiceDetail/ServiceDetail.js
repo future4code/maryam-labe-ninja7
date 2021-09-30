@@ -2,6 +2,9 @@ import axios from "axios";
 import React from "react";
 import styled from "styled-components";
 import { axiosConfig, baseUrl } from "../../constants";
+import {Button} from "antd";
+import "antd/dist/antd.css";
+
 
 class ServiceDetail extends React.Component {
   state = {
@@ -31,9 +34,9 @@ class ServiceDetail extends React.Component {
       date.getDate() + "/" + date.getMonth() + "/" + date.getFullYear();
     console.log(this.state.service.paymentMethods);
 
-     const paymentMethod = this.state.paymentMethods.map(
-       (service) => <li key={service}>{service}</li>
-     );
+    const paymentMethod = this.state.paymentMethods.map(
+      (service) => <li key={service}>{service}</li>
+    );
 
     return (
       <div>
@@ -42,13 +45,13 @@ class ServiceDetail extends React.Component {
         <p>Prazo: {dateFormat}</p>
         <p>{this.state.service.description}</p>
         <div>{paymentMethod}</div>
-        <button
+        <Button type="primary"
           onClick={() => {
             this.props.changePage("services", "");
           }}
         >
           Voltar
-        </button>
+        </Button>
       </div>
     );
   }

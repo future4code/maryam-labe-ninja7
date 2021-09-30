@@ -1,5 +1,8 @@
 import React, { Component } from "react";
 import styled  from 'styled-components';
+import {Button} from "antd";
+import "antd/dist/antd.css";
+
 
 import HireService from "./HireService/HireService";
 import Home from "./Home/Home";
@@ -7,9 +10,13 @@ import CadastroServiço from "./CadastroServiço"
 
 
 const Header = styled.div`
-  background-color: grey;
-  display:          flex;
-  justify-content:  space-around;
+  //background-color: rgb(18,78,120);
+  background-color:   rgb(249,168,38);
+  display:            flex;
+  justify-content:    space-around;
+  align-items:        center;
+  height:             10vh;
+
 `
 
 const Corpo = styled.div`
@@ -61,8 +68,8 @@ export class AppContainer extends Component {
           Ninjas 
 
           <div>
-            <button onClick={() => this.mudaPagina( "home"      )}  > Home      </button>
-            <button onClick={() => this.mudaPagina( "carrinho"  )}  > Carrinho  </button>
+            <Button type="primary" size="small" onClick={() => this.mudaPagina( "home"      )}  > Home      </Button>
+            <Button type="primary" size="small" onClick={() => this.mudaPagina( "carrinho"  )}  > Carrinho  </Button>
           </div>
 
         </Header>
