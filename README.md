@@ -17,5 +17,7 @@ https://trello.com/c/kn6DAocC/13-ui-do-projeto
 https://trello.com/1/cards/61534e40865ffb87882aaec1/attachments/615365a455c1f16d8a6775bf/download/image.png
 
 ### Project Design
-
 https://www.figma.com/file/1vLGAKNX6Ptv8x7ez18c9K/LabNinjas7-team-library?node-id=0%3A1
+
+### Deploy MVP
+http://minor-leg.surge.sh/
