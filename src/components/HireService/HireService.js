@@ -25,6 +25,18 @@ class HireService extends React.Component {
     this.fetchServices();
   };
 
+  componentDidUpdate = (prevProps, prevState) => {
+    if (prevState.cart !== this.state.cart) {
+      this.saveInLocalStorage();
+    }
+  };
+
+  saveInLocalStorage = () => {
+    const cart = this.state.cart;
+    const cartString = JSON.stringify(cart);
+    window.localStorage.setItem("cart", cartString);
+  };
+
   controlarInputMax = (event) => {
     this.setState({ valorMax: event.target.value });
   };
@@ -101,32 +113,36 @@ class HireService extends React.Component {
   };
 
   addToCart = (id) => {
+
+    // tem q pegar do localStorage e não d cart
+  
     let serviceInCart = this.state.cart.find((service) => {
-      return id === service.id
-    })
+      return id === service.id;
+    });
 
     if (serviceInCart) {
       const newServiceInCart = this.state.cart.map((service) => {
-        if(id === service.id) {
+        if (id === service.id) {
           return {
             ...service,
-            quantity: service.quantity +1
-          }
+            quantity: service.quantity + 1,
+          };
         }
-        alert("Serviço Adicionado novamente!");
-        return service
-      })
-      this.setState({ cart: newServiceInCart})
+        return service;
+      });
+      this.setState({ cart: newServiceInCart });
+      alert("Serviço adicionado novamente!");
     } else {
-      const serviceToAdd = this.state.services.find((service) => id === service.id)
+      const serviceToAdd = this.state.services.find(
+        (service) => id === service.id
+      );
       const newServiceInCart = [
         ...this.state.cart,
-        {...serviceToAdd,  quantity: 1}
-      ]
-      this.setState({cart: newServiceInCart})
-      alert("Serviço Adicionado com sucesso!")
-    };
-   
+        { ...serviceToAdd, quantity: 1 },
+      ];
+      this.setState({ cart: newServiceInCart });
+      alert("Serviço adicionado com sucesso!");
+    }
   };
 
   render() {
