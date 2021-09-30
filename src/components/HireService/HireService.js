@@ -2,11 +2,14 @@ import axios from "axios";
 import React from "react";
 import { axiosConfig, baseUrl } from "../../constants";
 import Filter from "../Filter";
-import Services from "../Services";
+import ServiceDetail from "../ServiceDetail/ServiceDetail";
+import Services from "../ServicesCard";
 
 class HireService extends React.Component {
   state = {
     services: [],
+    serviceID: "",
+    currentPage: "services",
     valorMin: "",
     valorMax: "",
     pesquisaNome: "",
@@ -77,7 +80,7 @@ class HireService extends React.Component {
           case "nenhum":
             break;
           case "dueDate":
-            return b.dueDate - a.dueDate;
+            return Date.parse(b.dueDate) - Date.parse(a.dueDate);
           default:
             break;
         }
@@ -86,22 +89,42 @@ class HireService extends React.Component {
     return filterServices;
   };
 
+  changePage = (currentPage, serviceID) => {
+    this.setState({
+      currentPage: currentPage,
+      serviceID: serviceID,
+    });
+  };
+
   render() {
-    return (
-      <div>
-        <Filter
-          atualizarMax={this.controlarInputMax}
-          atualizarMin={this.controlarInputMin}
-          atualizarpesquisaNome={this.controlarInputNome}
-          valorMax={this.state.valorMax}
-          valorMin={this.state.valorMin}
-          pesquisaNome={this.state.pesquisaNome}
-          ordem={this.state.ordem}
-          atualizarOrdem={this.controlarInputOrdem}
-        />
-        <Services services={this.filterServices(this.state.services)} />
-      </div>
-    );
+    const renderCurrentPage = () => {
+      if (this.state.currentPage === "services") {
+        return (
+          <div>
+            <Filter
+              atualizarMax={this.controlarInputMax}
+              atualizarMin={this.controlarInputMin}
+              atualizarpesquisaNome={this.controlarInputNome}
+              valorMax={this.state.valorMax}
+              valorMin={this.state.valorMin}
+              pesquisaNome={this.state.pesquisaNome}
+              ordem={this.state.ordem}
+              atualizarOrdem={this.controlarInputOrdem}
+            />
+            <Services
+              services={this.filterServices(this.state.services)}
+              changePage={this.changePage}
+            />
+          </div>
+        );
+      }
+      if (this.state.currentPage === "seeDetails") {
+        return (
+          <ServiceDetail changePage={this.changePage} serviceID={this.state.serviceID}/>
+        )
+      }
+    };
+    return <div>{renderCurrentPage()}</div>;
   }
 }
 
