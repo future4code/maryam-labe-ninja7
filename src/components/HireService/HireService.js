@@ -14,7 +14,7 @@ class HireService extends React.Component {
     valorMax: "",
     pesquisaNome: "",
     ordem: "",
-    carrinho: [],
+    cart: [],
   };
 
   componentDidMount = () => {
@@ -96,6 +96,35 @@ class HireService extends React.Component {
     });
   };
 
+  addToCart = (id) => {
+    let serviceInCart = this.state.cart.find((service) => {
+      return id === service.id
+    })
+
+    if (serviceInCart) {
+      const newServiceInCart = this.state.cart.map((service) => {
+        if(id === service.id) {
+          return {
+            ...service,
+            quantity: service.quantity +1
+          }
+        }
+        alert("Serviço Adicionado novamente!");
+        return service
+      })
+      this.setState({ cart: newServiceInCart})
+    } else {
+      const serviceToAdd = this.state.services.find((service) => id === service.id)
+      const newServiceInCart = [
+        ...this.state.cart,
+        {...serviceToAdd,  quantity: 1}
+      ]
+      this.setState({cart: newServiceInCart})
+      alert("Serviço Adicionado com sucesso!")
+    };
+   
+  };
+
   render() {
     const renderCurrentPage = () => {
       if (this.state.currentPage === "services") {
@@ -114,14 +143,18 @@ class HireService extends React.Component {
             <Services
               services={this.filterServices(this.state.services)}
               changePage={this.changePage}
+              addToCart={this.addToCart}
             />
           </div>
         );
       }
       if (this.state.currentPage === "seeDetails") {
         return (
-          <ServiceDetail changePage={this.changePage} serviceID={this.state.serviceID}/>
-        )
+          <ServiceDetail
+            changePage={this.changePage}
+            serviceID={this.state.serviceID}
+          />
+        );
       }
     };
     return <div>{renderCurrentPage()}</div>;
