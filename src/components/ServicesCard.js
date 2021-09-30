@@ -1,5 +1,8 @@
 import React from "react";
 import styled from "styled-components";
+import {Button} from "antd";
+import "antd/dist/antd.css";
+
 
 class Services extends React.Component {
   render() {
@@ -14,20 +17,20 @@ class Services extends React.Component {
             <p>Preço: R$ {service.price}</p>
             <p>Prazo: {dateFormat} </p>
             <div>
-              <button
+              <Button
                 onClick={() => {
                   this.props.changePage("seeDetails", service.id);
                 }}
               >
                 Ver detalhes
-              </button>
-              <button
+              </Button>
+              <Button
                 onClick={() => {
                   this.props.addToCart(service.id);
                 }}
               >
                 Adicionar no Carrinho
-              </button>
+              </Button>
             </div>
           </ProductCardContainer>
         </div>
