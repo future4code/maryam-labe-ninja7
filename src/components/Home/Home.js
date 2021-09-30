@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import styled  from 'styled-components';
 import {Button} from "antd";
-import "antd/dist/antd.css";
 import logo from "./ninja.png"
 
 const Container = styled.div`
@@ -22,13 +21,13 @@ const ContainerBotao = styled.div`
 `
 
 const ContainerTexto = styled.div`
-    display:            flex;
-    flex-direction:     column;
-    align-items:        center;
+    display:          flex;
+    flex-direction:   column;
+    align-items:      center;
 `
 
 const Img = styled.img`
-    width:          80vw;
+    width:          30vw;
     height:         auto;
     margin-top:     1vh;
 

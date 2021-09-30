@@ -5,6 +5,23 @@ import { axiosConfig, baseUrl } from "../../constants";
 import {Button} from "antd";
 import "antd/dist/antd.css";
 
+const Container = styled.div`
+    width:              100vw;
+    min-height:         100vh;
+    background-color:   rgb(250,250,250) ;
+`
+
+const Cont = styled.div`
+    margin-top:         5vh;
+    width:              97vw;
+    min-height:         30vh;
+    display:            flex;
+    flex-direction:     column;
+    align-items:        center;
+    justify-content:    space-around;
+    background-color:   rgb(250,250,250) ;
+`
+
 
 class ServiceDetail extends React.Component {
   state = {
@@ -39,20 +56,32 @@ class ServiceDetail extends React.Component {
     );
 
     return (
-      <div>
-        <h3>{this.state.service.title}</h3>
-        <p>Preço: R${this.state.service.price}</p>
-        <p>Prazo: {dateFormat}</p>
-        <p>{this.state.service.description}</p>
-        <div>{paymentMethod}</div>
-        <Button type="primary"
-          onClick={() => {
-            this.props.changePage("services", "");
-          }}
-        >
-          Voltar
-        </Button>
-      </div>
+
+      <Container>
+        <Cont>
+          <h3>{this.state.service.title}</h3>
+
+          <div>
+            <p>Preço: R${this.state.service.price}</p>
+            <p>Prazo: {dateFormat}</p>
+            <p>{this.state.service.description}</p>
+            <br />
+
+            <p>Formas de pagamento: </p>
+            <div>{paymentMethod}</div>
+          </div>
+
+          <br />
+          <Button type="primary"
+            onClick={() => {
+              this.props.changePage("services", "");
+            }}
+          >
+            Voltar
+          </Button>
+
+          </Cont>
+      </Container>
     );
   }
 }
