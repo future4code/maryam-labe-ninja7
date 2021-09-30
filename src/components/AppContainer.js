@@ -4,6 +4,7 @@ import styled  from 'styled-components';
 import HireService from "./HireService/HireService";
 import Home from "./Home/Home";
 import CadastroServiço from "./CadastroServiço"
+import Carrinho from "./Carrinho/Carrinho";
 
 import {Button} from "antd";
 import "../styles/antd.css";
@@ -61,7 +62,10 @@ export class AppContainer extends Component {
       }
 
       else if(this.state.paginaAtual === "carrinho") {
-        return(   <Home             mudaPagina = {this.mudaPagina}  /> )
+
+
+        return(   <Carrinho mudaPagina = {this.mudaPagina}  /> )
+
       }
 
       else if(this.state.paginaAtual === "ninja") {
