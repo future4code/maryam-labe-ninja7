@@ -49,10 +49,15 @@ const FilterContainer = styled.div`
   padding: 40px;
 
   input {
-    width: 200px;
+    width:            200px;
+    background-color: rgb(240,240,201);
+    border:           0px;
+
   }
 
   select {
     width: 200px;
+    background-color: rgb(240,240,201);
+
   }
 `;

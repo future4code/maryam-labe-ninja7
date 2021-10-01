@@ -110,6 +110,8 @@ class HireService extends React.Component {
       currentPage: currentPage,
       serviceID: serviceID,
     });
+
+
   };
 
   addToCart = (id) => {
@@ -138,11 +140,13 @@ class HireService extends React.Component {
       );
       const newServiceInCart = [
         ...this.state.cart,
+
         { ...serviceToAdd, quantity: 1 },
       ];
       this.setState({ cart: newServiceInCart });
       alert("Serviço adicionado com sucesso!");
     }
+
   };
 
   render() {

@@ -3,14 +3,25 @@ import axios from "axios";
 import styled from "styled-components"
 import { key } from "../constants";
 import {Button} from "antd";
-import "antd/dist/antd.css";
+//import "../styles/temp.css";
 
 
 const TelaCadastro = styled.div`
-    justify-items: center;
-    align-items: center;
-    width: 100%;
+    display:            flex;
+    flex-direction:     column;
+    justify-content:    center;
+    align-items:        center;
+    width:              100%;
     `
+
+const Input = styled.input`
+    margin:             1vh;
+    width:              35vw;
+    background-color:   rgb(240,240,201);
+    border:             0px;
+
+
+`
 
 export default class CadastroServiço extends React.Component{
     state = {
@@ -76,42 +87,41 @@ export default class CadastroServiço extends React.Component{
     render(){
         return (
             <TelaCadastro>
-                <Button type="primary" onClick={() => this.props.mudaPagina("home")   }> Home </Button>
-                <h2>CADASTRE SEU SERVIÇO</h2>
+                <br/>
 
-                <input placeholder={"Título"}
+                <h2>Cadastre seu serviço</h2>
+
+                <Input placeholder={"Título"}
                         value={this.state.titulo}
                         onChange={this.handleTitulo}/>
 
-                <p>
-                    <input placeholder={"Descrição"}
+                <Input placeholder={"Descrição"}
                     value={this.state.descrição}
                     onChange={this.handleDescrição}/>
-                </p>
+                
 
-                <p>
-                    <input placeholder={"Preço"}
+                
+                <Input placeholder={"Preço"}
                     value={this.state.preço}
                     onChange={this.handlePreço}/>
-                </p>
 
-                <p>
-                    <select placeholder="Pagamento"
+
+                <select placeholder="Pagamento"
                     value={this.state.pagamento}
                     onChange={this.handlePagamento}>
                             
-                        <option>Cartão de Débito </option>
-                        <option>Cartão de Crédito</option>
-                        <option>Boleto</option>
-                        <option>Pix</option>
-                    </select>
-                </p>
+                    <option>Cartão de Débito </option>
+                    <option>Cartão de Crédito</option>
+                    <option>Boleto</option>
+                    <option>Pix</option>
+                </select>
 
-                <p>
-                    <input placeholder={"Prazo"}
+
+                <Input placeholder={"Prazo"}
                     value={this.state.prazo}
                     onChange={this.handlePrazo}/>
-                </p>
+
+
 
                 <Button type="primary" onClick={this.createUser}>Cadastrar Serviço</Button>
             </TelaCadastro>
