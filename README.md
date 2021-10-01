@@ -21,3 +21,6 @@ https://www.figma.com/file/1vLGAKNX6Ptv8x7ez18c9K/LabNinjas7-team-library?node-i
 
 ### Deploy MVP
 http://minor-leg.surge.sh/
+
+### Final Project
+http://sneaky-theory.surge.sh/
