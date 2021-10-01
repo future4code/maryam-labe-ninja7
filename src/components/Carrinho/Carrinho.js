@@ -1,5 +1,8 @@
 import React from "react";
 import styled from "styled-components";
+import { Button } from "antd";
+import "../../styles/antd.css";
+
 
 class Carrinho extends React.Component {
   state = {
@@ -66,35 +69,62 @@ class Carrinho extends React.Component {
   render() {
     const cartList = this.state.cart.map((job) => {
       return (
-        <div key={job.id}>
-          <li>{job.title}</li>
-          <li>{job.price}</li>
-          <li>{job.quantity}</li>
-          <button
+        <CardContainer key={job.id}>
+          <p>{job.title}</p>
+          <p>R$ {job.price}</p>
+          <p>{job.quantity}</p>
+          <Button
+            className="ant-btn-primary"
             onClick={() => {
               this.removeCart(job.id);
             }}
           >
             Remover
-          </button>
-        </div>
+          </Button>
+        </CardContainer>
       );
     });
     return (
       <div>
-        <div>{cartList ? cartList : <h2>Carrinho vazio</h2>}</div>
+        {cartList ? cartList : <h2>Carrinho vazio</h2>}
         <p>Total: R$ {this.totalValue()}</p>
-        <button onClick={this.contratantes}>Finalizar</button>
-        <button
-          onClick={() => {
-            this.props.mudaPagina("servicos");
-          }}
-        >
-          Ir para Lista
-        </button>
+        <ButtonContainer>
+          <Button className="ant-btn-primary" onClick={this.contratantes}>
+            Finalizar
+          </Button>
+          <Button
+            className="ant-btn-primary"
+            type="default"
+            size="medium"
+            onClick={() => {
+              this.props.mudaPagina("servicos");
+            }}
+          >
+            Ir para Lista
+          </Button>
+        </ButtonContainer>
       </div>
     );
   }
 }
 
 export default Carrinho;
+
+
+const CardContainer = styled.div`
+ 
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  width: 90vw;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  padding: 50px;
+  background-color: rgb(240, 240, 201);
+`;
+
+const ButtonContainer = styled.div`
+display: flex;
+flex-direction: row;
+justify-content: space-between;
+`
